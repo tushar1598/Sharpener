@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+    <style>
+        #App {
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 30%;
+            margin: 50px auto;
+            height: 250px;
+        }
+
+        input {
+            height: 30px;
+
+        }
+
+        form {
+            display: grid;
+            width: 80%;
+            gap: 30px;
+            margin: 40px auto;
+        }
+
+        table {
+            margin: auto;
+            width: 30%;
+        }
+
+        tbody td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="App">
+        <form action="">
+            <input id="name" type="text" placeholder="your name">
+            <input id="email" type="email" placeholder="your email">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="output">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- append your output here -->
+            </tbody>
+        </table>
+
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+
+    document.querySelector("form").addEventListener("submit", myData);
+    let Data = [];
+    function myData() {
+        event.preventDefault();
+        let name = document.querySelector("#name").value;
+        let email = document.querySelector("#email").value;
+        let obj = {
+            Name: name,
+            Email: email
+        }
+        Data.push(obj)
+        localStorage.setItem("User", JSON.stringify(Data));
+        document.querySelector("#name").value = ""
+        document.querySelector("#email").value = ""
+        DisplayTable(Data);
+    }
+
+    function DisplayTable(user) {
+        document.querySelector("tbody").innerHTML = " ";
+        for (let i = 0; i < user.length; i++) {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerText = i + 1;
+            let td2 = document.createElement("td");
+            td2.innerText = user[i].Name;
+            let td3 = document.createElement("td");
+            td3.innerText = user[i].Email;
+
+            tr.append(td1, td2, td3);
+            document.querySelector("tbody").append(tr);
+        }
+    }
+
+</script>
