@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <title>Expense Tracker</title>
+    <style>
+        #data {
+            display: flex;
+        }
+
+        #parent {
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 600px;
+            height: 400px;
+            margin: 80px auto;
+        }
+
+        div form {
+            width: 500px;
+            margin: 35px auto;
+        }
+
+        select {
+            width: 500px;
+            height: 45px;
+            margin-top: 5px;
+            outline: none;
+            border: 1px solid rgb(220, 216, 216);
+            border-radius: 5px;
+        }
+
+        #category {
+            position: relative;
+            top: 5px;
+        }
+
+        table {
+            margin: auto;
+            width: 390px;
+            text-align: center;
+            margin-right: 40px;
+
+        }
+
+        th {
+            border: 1px solid white;
+            background-color: teal;
+            color: white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            padding: 6px;
+        }
+
+        td {
+            border: 0.1px solid white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            padding: 7px;
+        }
+
+        #output {
+            margin-top: 100px;
+            margin-right: 160px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="data">
+        <div id="parent">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Choose Expenseamount</label>
+                    <input type="number" class="form-control" id="amount" aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Choose Description</label>
+                    <input type="text" class="form-control" id="description" required>
+                </div>
+                <div class="mb-3">
+                    <label id="category" for="exampleInputEmail1" class="form-label">Category</label>
+                    <select id="cat" class="mb-3" required>
+                        <option value="">Choose a category</option>
+                        <option value="movies">Movies</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="trip">Trip</option>
+                        <option value="vacation">vacation</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div id="output">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- append your output here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+
+<script>
+
+    document.querySelector("form").addEventListener("submit", myData);
+    let Data = JSON.parse(localStorage.getItem("ExpenseTracker")) || []
+    function myData() {
+        event.preventDefault();
+        let amount = document.querySelector("#amount").value;
+        let description = document.querySelector("#description").value;
+        let category = document.querySelector("#cat").value;
+
+        let obj = {
+            Amount: amount,
+            Description: description,
+            Category: category
+        }
+
+        Data.push(obj);
+        localStorage.setItem("ExpenseTracker", JSON.stringify(Data));
+        document.querySelector("#amount").value = "";
+        document.querySelector("#description").value = "";
+        document.querySelector("#cat").value = ""
+        location.reload();
+    }
+
+    Data.forEach(function (elem, index) {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        td1.innerText = elem.Amount
+        let td2 = document.createElement("td");
+        td2.innerText = elem.Category;
+        let td3 = document.createElement("td");
+        td3.innerText = elem.Description;
+        let td4 = document.createElement("td");
+        td4.innerText = "Delete";
+        td4.style.backgroundColor = "rgb(211, 93, 93)"
+        td4.style.color = "white";
+        td4.style.cursor = "pointer"
+        td4.addEventListener("click", function () {
+            Data.splice(index, 1);
+            localStorage.setItem("ExpenseTracker", JSON.stringify(Data));
+            location.reload();
+        })
+        let td5 = document.createElement("td");
+        td5.addEventListener("click", function (event) {
+            event.preventDefault();
+            document.querySelector("#amount").value = elem.Amount;
+            document.querySelector("#cat").value = elem.Category;
+            document.querySelector("#description").value = elem.Description;
+            Data.splice(index, 1);
+            localStorage.setItem("ExpenseTracker", JSON.stringify(Data));
+        })
+        td5.innerText = "Edit";
+        td5.style.backgroundColor = "rgb(83, 194, 81)"
+        td5.style.color = "white";
+        td5.style.cursor = "pointer"
+
+        tr.append(td1, td2, td3, td4, td5)
+        document.querySelector("tbody").append(tr);
+
+    });
+
+</script>
