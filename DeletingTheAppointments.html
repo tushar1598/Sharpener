@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <title>Expense Tracker</title>
+    <style>
+        #data {
+            display: flex;
+        }
+
+        #parent {
+            border: 1px solid white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 600px;
+            height: 400px;
+            margin: 80px auto;
+        }
+
+        div form {
+            width: 500px;
+            margin: 35px auto;
+        }
+
+        select {
+            width: 500px;
+            height: 45px;
+            margin-top: 5px;
+            outline: none;
+            border: 1px solid rgb(220, 216, 216);
+            border-radius: 5px;
+        }
+
+        #category {
+            position: relative;
+            top: 5px;
+        }
+
+        table {
+            margin: auto;
+            width: 390px;
+            text-align: center;
+            margin-right: 40px;
+
+        }
+
+        th {
+            border: 1px solid white;
+            background-color: teal;
+            color: white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            padding: 6px;
+        }
+
+        td {
+            border: 0.1px solid white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            padding: 7px;
+        }
+
+        #output {
+            margin-top: 100px;
+            margin-right: 160px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="data">
+        <div id="parent">
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div id="output">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>_id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- append your output here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+    integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    document.querySelector("form").addEventListener("submit", myData);
+
+    function myData() {
+        event.preventDefault();
+        let name = document.querySelector("#name").value;
+        let email = document.querySelector("#email").value;
+        let obj = {
+            name,
+            email,
+        }
+        axios.post("https://crudcrud.com/api/3a2871a1a0d749d6bdfd62f360f3a8a2/MyAppointment", obj)
+            .then(res => Display(res.data))
+            .then(err => console.log(err));
+
+    }
+
+    function Display(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            let row = document.createElement("tr");
+            let id = document.createElement("td");
+            id.innerText = arr[i]._id;
+            let name = document.createElement("td");
+            name.innerText = arr[i].name;
+            let email = document.createElement("td");
+            email.innerText = arr[i].email;
+            let D = document.createElement("td");
+            D.innerText = "Delete"
+            D.style.backgroundColor = 'red'
+            D.style.color = 'white'
+            D.style.cursor = 'pointer'
+            D.addEventListener("click", function () {
+                axios.delete(`https://crudcrud.com/api/3a2871a1a0d749d6bdfd62f360f3a8a2/MyAppointment/${id.innerText}`)
+
+            })
+            row.append(id, name, email, D);
+            document.querySelector("tbody").append(row);
+        }
+    }
+
+
+
+    axios.get("https://crudcrud.com/api/3a2871a1a0d749d6bdfd62f360f3a8a2/MyAppointment")
+        .then(res => { Display(res.data) })
+
+
+
+
+</script>
