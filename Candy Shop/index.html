@@ -1,0 +1,153 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Shop</title>
+    <style>
+        table {
+            text-align: center;
+        }
+
+
+
+        table th {
+            background-color: teal;
+            color: white;
+            padding: 8px;
+        }
+
+        table td {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Candy Store</h1>
+    <form>
+        <input type="text" placeholder="Candy Name" id="name">
+        <input type="text" placeholder="Description" id="description">
+        <input type="number" placeholder="Price" id="price">
+        <input type="number" placeholder="Quantity" id="quantity">
+        <input type="submit" value="Add Items">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- appned your output here -->
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+    integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+
+
+<script>
+
+    document.querySelector("form").addEventListener("submit", myFun);
+
+    function myFun(event) {
+        event.preventDefault();
+        let name = document.querySelector("#name").value;
+        let description = document.querySelector("#description").value;
+        let price = document.querySelector("#price").value;
+        let quantity = document.querySelector("#quantity").value;
+
+        let obj = {
+            name, description, price, quantity
+        }
+
+
+        axios.post("https://crudcrud.com/api/a01597c26075405397f1b890c318b43f/Data", obj)
+            .then(res => console.log(res.data))
+            .catch(err => console.log("error"))
+
+
+    }
+
+
+
+    axios.get("https://crudcrud.com/api/a01597c26075405397f1b890c318b43f/Data")
+        .then(res => Display(res.data))
+
+
+    function Display(arr) {
+
+        arr.forEach((elem, index) => {
+            let row = document.createElement("tr");
+
+            let name = document.createElement("td");
+            name.innerText = elem.name
+            let description = document.createElement("td");
+            description.innerText = elem.description
+            let price = document.createElement("td");
+            price.innerText = elem.price
+            let quantity = document.createElement("td");
+            quantity.innerText = elem.quantity
+            let buy1 = document.createElement("button")
+            buy1.innerText = "Buy 1"
+            buy1.addEventListener("click", function () {
+                if (elem.quantity >= 1) {
+                    elem.quantity -= 1
+                    console.log(elem)
+                    return axios.put(`https://crudcrud.com/api/a01597c26075405397f1b890c318b43f/Data/${elem._id}`, { name: `${elem.name}`, description: `${elem.description}`, price: `${elem.price}`, quantity: `${elem.quantity}` })
+                } else {
+                    alert("This Candy is not Availavle!!")
+                }
+            })
+            let buy2 = document.createElement("button")
+            buy2.innerText = "Buy 2"
+            buy2.addEventListener("click", function () {
+                if (elem.quantity >= 2) {
+                    elem.quantity -= 2
+                    console.log(elem)
+                    return axios.put(`https://crudcrud.com/api/a01597c26075405397f1b890c318b43f/Data/${elem._id}`, { name: `${elem.name}`, description: `${elem.description}`, price: `${elem.price}`, quantity: `${elem.quantity}` })
+                } else {
+                    alert("This Candy is not Availavle!!")
+                }
+
+
+            })
+            let buy3 = document.createElement("button")
+            buy3.innerText = "Buy 3"
+            buy3.addEventListener("click", function () {
+                if (elem.quantity >= 3) {
+                    elem.quantity -= 3
+                    console.log(elem)
+                    return axios.put(`https://crudcrud.com/api/a01597c26075405397f1b890c318b43f/Data/${elem._id}`, { name: `${elem.name}`, description: `${elem.description}`, price: `${elem.price}`, quantity: `${elem.quantity}` })
+                } else {
+                    alert("This Candy is not Availavle!!")
+                }
+            })
+
+
+            row.append(name, description, price, quantity, buy1, buy2, buy3);
+            document.querySelector("tbody").append(row);
+        });
+
+    }
+
+
+</script>
