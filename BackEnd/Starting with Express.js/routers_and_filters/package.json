@@ -1,0 +1,14 @@
+{
+  "name": "routers-and-filters",
+  "version": "1.0.0",
+  "description": "routing and filters",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tushar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
