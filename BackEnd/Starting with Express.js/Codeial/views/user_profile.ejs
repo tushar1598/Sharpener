@@ -1,0 +1,24 @@
+<title>
+    <%= title %>
+</title>
+<link rel="stylesheet" href="/css/profile.css">
+
+<form action="/user/create-contact" method="post">
+    <input type="text" name="name" placeholder="name" required>
+    <input type="number" name="phone" placeholder="phone" required>
+    <input type="submit" value="Add Contact">
+</form>
+
+
+<ul>
+    <% for(let i of phone) {%>
+        <li>
+            <p>
+                <%= i.name %><span>&nbsp;:-</span> <span>
+                        <%= i.phone %>
+                    </span> <a href="/user/remove/?id=<%= i._id %>"><img
+                            src="https://cdn-icons-png.flaticon.com/128/484/484662.png" alt=""></a>
+            </p>
+        </li>
+        <%}%>
+</ul>
