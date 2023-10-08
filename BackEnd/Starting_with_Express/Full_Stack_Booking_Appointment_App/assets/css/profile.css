@@ -1,0 +1,39 @@
+#profile {
+    width: 40%;
+    margin: 70px auto;
+    border: 1px solid white;
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+form {
+    display: grid;
+    width: 80%;
+    margin: 50px auto;
+    gap: 40px;
+}
+
+input {
+    padding: 10px;
+    outline: none;
+    border-radius: 7px;
+    border: 0.5px solid black;
+}
+
+span{
+    position: relative;
+    top: -50px;
+    left: 55px;
+}
+
+h3{
+    text-align: center;
+    position: relative;
+    top: 30px;
+}
+
+#btn{
+    background-color: teal;
+    color: white;
+    border: none;
+}

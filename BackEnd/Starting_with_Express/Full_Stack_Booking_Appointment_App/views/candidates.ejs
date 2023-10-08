@@ -1,0 +1,39 @@
+<title>
+    <%= title %>
+</title>
+<link rel="stylesheet" href="/css/candidates.css">
+
+<%- include("_header.ejs") -%>
+    <h1>All Candidates</h1>
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for(let i of data) {%>
+                <tr>
+                    <td>
+                        <%= i.name %>
+                    </td>
+                    <td>
+                        <%= i.email %>
+                    </td>
+                    <td>
+                        <%= i.phone %>
+                    </td>
+                    <td>
+                        <a href="/delete/<%= i.email %>">Delete</a>
+                    </td>
+                </tr>
+                <%}%>
+        </tbody>
+    </table>
