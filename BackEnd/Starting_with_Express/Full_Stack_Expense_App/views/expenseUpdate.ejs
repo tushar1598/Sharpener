@@ -1,0 +1,19 @@
+
+<head>
+    <link rel="stylesheet" href="/css/expenseUpdate.css">
+</head>
+<h1>Update your data:-</h1>
+<div id="form">
+    <form action="/updated-data/<%= Data[0]._id %>" method="post">
+        <input type="number" name="Amount" value="<%= Data[0].Amount %>" placeholder="Amount" required>
+        <select name="Category" required>
+            <option value="">Updated your category</option>
+            <option value="Movies">Movies</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Trip">Trip</option>
+            <option value="Vacation">Vacation</option>
+        </select>
+        <input type="text" name="Description" value="<%= Data[0].Description %>" placeholder="Description" required>
+        <input id="btn" type="submit" value="Update">
+    </form>
+</div>

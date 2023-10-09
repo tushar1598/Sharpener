@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/expense.css">
+</head>
+
+<body>
+    <h1>Expense Tracker</h1>
+    <div id="form">
+        <form action="/expense-create" method="post">
+            <input type="number" name="Amount" placeholder="Amount" required>
+            <select name="Category" required>
+                <option value="">Choose a category</option>
+                <option value="Movies">Movies</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Trip">Trip</option>
+                <option value="Vacation">Vacation</option>
+            </select>
+            <input type="text" name="Description" placeholder="Description" required>
+            <input id="btn" type="submit" value="Submit">
+        </form>
+    </div>
+    
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- appned your output here -->
+            <% for(let i of Data) {%>
+                <tr>
+                    <td>
+                        <%= i.Amount %>
+                    </td>
+                    <td>
+                        <%= i.Category %>
+                    </td>
+                    <td>
+                        <%= i.Description %>
+                    </td>
+                    <td id="delete">
+                        <a href="/Delete-expense/<%= i._id %>">Remove</a>
+                    </td>
+                    <td id="update">
+                        <a href="/update/<%= i._id %>">Edit</a>
+                    </td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
