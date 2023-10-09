@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/profile.css">
+<%- include("_header.ejs") -%>
+
+    <h3>Book Your Slots......</h3>
+
+    <div id="profile">
+        <form action="/create-slot" method="post">
+            <input type="text" name="name" placeholder="Enter your name...." required>
+            <input type="email" name="email" placeholder="Enter your email...." required>
+            <input type="number" name="phone" placeholder="Enter your phone...." required>
+            <input id="btn" type="submit" value="Book Now">
+        </form>
+    </div>
