@@ -1,0 +1,17 @@
+<title>
+    <%= title %>
+</title>
+<link rel="stylesheet" href="/css/sign_in.css">
+<%- include("_header") -%>
+
+    <div id="sign-in">
+        <h4>Login to your account</h4>
+        <form action="/create-session" method="post">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input id="btn" type="submit" value="sign-in">
+        </form>
+
+        <span>Don't have an account? <a href="/sign-up">sign-up</a></span>
+
+    </div>
