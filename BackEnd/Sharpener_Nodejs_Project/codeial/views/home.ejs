@@ -1,0 +1,46 @@
+<style>
+    button {
+        width: 100px;
+        padding: 10px;
+        background-color: white;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+
+    #parent {
+        display: flex;
+        gap: 20px;
+    }
+
+    #data {
+        border: 1px solid black;
+        width: 400px;
+        text-align: center;
+    }
+</style>
+
+<h1>This is my home page</h1>
+
+<% for(let i of Data) {%>
+    <form action="/book-slot/<%= i.id %>" method="post">
+        <button>
+            <%= i.Time %>
+                <div>
+                    <%= i.Seat %> Available
+                </div>
+        </button>
+    </form>
+    <%}%>
+
+        <div id="parent">
+            <% for(let i of users) {%>
+                <div id="data">
+                    <p>hii <%= i.Name %>
+                    </p>
+                    <p>Please join the meeting via this link <a
+                            href="https://meet.google.com/rie-kxsw-bhx">https://meet.google.com/rie-kxsw-bhx</a> at <%=
+                            i.Time %>
+                    </p>
+                </div>
+            <%}%>
+        </div>
