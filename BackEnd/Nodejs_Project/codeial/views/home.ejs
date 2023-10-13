@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create MySQL Table</title>
+    <style>
+        #parent {
+            border: 1px solid rgb(233, 222, 224);
+            box-shadow: #fffefe 0px 3px 8px;
+            background-color: whitesmoke;
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        form {
+            margin-left: 20px;
+        }
+
+        #table-name {
+            display: grid;
+            width: 20%;
+            margin-top: 50px;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 10px;
+
+        }
+
+        label {
+            position: relative;
+            top: 10px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        #type {
+            position: relative;
+            left: 102px;
+        }
+
+        #columns {
+            margin-top: 40px;
+        }
+
+        .type {
+            position: relative;
+            top: 50px;
+        }
+
+        #create-table {
+            background-color: rgb(133, 79, 233);
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        p {
+            height: 40px;
+        }
+
+        #add_column {
+            border: none;
+            color: blue;
+            background-color: whitesmoke;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: -10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="parent">
+        <form method="post" action="/create-table">
+            <div id="table-name">
+                <label for="table_name">Table Name:</label>
+                <input type="text" name="table_name" placeholder="Table Name" required>
+            </div>
+            <label class="type" for="">Field Name</label>
+            <label id="type" class="type" for="">Type</label>
+            <div id="columns">
+                <div class="column">
+                    <input type="text" name="column_name[]" placeholder="Field Name" required>
+                    <select name="data_type[]">
+                        <option value="INT">INT</option>
+                        <option value="VARCHAR(255)">VARCHAR(255)</option>
+                        <option value="DATE">DATE</option>
+                        <!-- Add more data types as needed -->
+                    </select>
+                </div>
+            </div>
+            <button type="button" id="add_column">Add Another Field</button>
+            <br><br>
+            <input id="create-table" type="submit" value="Create Table">
+        </form>
+        <p></p>
+    </div>
+
+    <script>
+        // JavaScript to add more columns dynamically
+        document.getElementById('add_column').addEventListener('click', function () {
+            const columns = document.getElementById('columns');
+            const column = document.querySelector('.column').cloneNode(true);
+            columns.appendChild(column);
+        });
+    </script>
+</body>
+
+</html>
