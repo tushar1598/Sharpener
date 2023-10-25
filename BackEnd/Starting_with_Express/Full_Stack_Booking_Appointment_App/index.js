@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const mysql = require("mysql2");
 
-
 // for cookie-parser:-
 app.use(cookieParser());
 
