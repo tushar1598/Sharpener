@@ -1,0 +1,53 @@
+#parent {
+    width: 40%;
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: auto;
+    height: 580px;
+    margin-top: -50px;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+#parent a{
+    text-decoration: none;
+}
+
+label {
+    font-weight: 600;
+    font-size: 17px;
+    position: relative;
+    top: 8px;
+}
+
+#parent>span {
+    position: relative;
+    left: 55px;
+    top: 12px;
+}
+
+form {
+    display: grid;
+    gap: 15px;
+    width: 80%;
+    margin: auto;
+}
+
+input {
+    padding: 7px;
+    outline: none;
+}
+
+#btn {
+    background-color: teal;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 130px;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+}

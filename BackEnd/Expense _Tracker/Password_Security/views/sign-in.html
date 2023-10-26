@@ -1,0 +1,17 @@
+<title>
+    <%= locals.title %>
+</title>
+<link rel="stylesheet" href="/css/sign-in.css">
+
+<%- include("_header.html") %>
+    <div id="parent">
+        <h2>Login to your account</h2>
+        <form action="/users/create-session" method="post">
+            <label for="">Username</label>
+            <input type="email" name="Email" placeholder="Email" required>
+            <label for="">Password</label>
+            <input type="password" name="Password" placeholder="Password" required>
+            <input id="btn" type="submit" value="Sign-in" />
+        </form>
+        <span>Don't have an account? <a href="/users/sign-up">Create</a></span>
+    </div>
