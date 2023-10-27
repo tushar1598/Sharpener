@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/profile.css">
+
+<%- include("_header.html") %>
+
+    <h1>Expense App</h1>
+    <div id="parent">
+
+        <div id="details">
+            <form action="/users/create-expense" method="post">
+                <label for="">Amount</label>
+                <input type="number" name="Amount" placeholder="Amount" required>
+                <label for="">Description</label>
+                <input type="text" name="Description" placeholder="Description" required>
+                <label for="">Category</label>
+                <select name="Category">
+                    <option value="">choose an option</option>
+                    <option value="Gym">Gym</option>
+                    <option value="Trip">Trip</option>
+                    <option value="School">School</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Food">Food</option>
+                </select>
+                <input id="btn" type="submit" value="Add Expense">
+            </form>
+        </div>
+
+
+        <div id="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i of data) {%>
+                        <tr>
+                            <td>
+                                <%= i.Amount %>
+                            </td>
+                            <td>
+                                <%= i.Description %>
+                            </td>
+                            <td>
+                                <%= i.Category %>
+                            </td>
+                            <td id="delete"><a href="/users/delete-expense/<%= i.id %>">Delete</a></td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>

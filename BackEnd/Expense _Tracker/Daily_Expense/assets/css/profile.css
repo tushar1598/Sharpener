@@ -1,0 +1,75 @@
+h1{
+    text-align: center;
+}
+
+#parent {
+    display: flex;
+    gap: 200px;
+}
+
+#details {
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 400px;
+    margin-left: 100px;
+    width: 500px;
+}
+
+label {
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    top: 10px;
+}
+
+#details>form {
+    display: grid;
+    gap: 18px;
+    width: 400px;
+    margin: 30px auto;
+}
+
+form input,
+select {
+    padding: 8px;
+    outline: none;
+}
+
+
+#btn {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    margin-top: 20px;
+}
+
+
+table {
+    width: 450px;
+    text-align: center;
+}
+
+thead th {
+    background-color: teal;
+    color: white;
+    padding: 8px;
+}
+
+td {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 6px;
+}
+
+#delete {
+    background-color: rgb(216, 75, 75);
+
+}
+
+#delete a {
+    color: white;
+    text-decoration: none;
+}
