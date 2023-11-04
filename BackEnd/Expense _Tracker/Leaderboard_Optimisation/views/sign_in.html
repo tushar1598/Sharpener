@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign-up</title>
+  <link rel="stylesheet" href="/css/sign-in.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <%- include("_header.html") %>
+
+    <div id="parent">
+      <h2>Login to your account</h2>
+      <form>
+        <label for="">Username</label>
+        <input type="email" id="email" placeholder="Email" required>
+        <label for="">Password</label>
+        <input type="password" id="password" placeholder="Password" required>
+        <a href="">Forgot Password</a>
+        <input id="btn" type="submit" value="Login">
+      </form>
+      <span>Don't have an account? <a href="/users/sign-up">Create</a></span>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+  integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
+
+
+<script>
+
+  document.querySelector("form").addEventListener("submit", myFun);
+
+
+
+  async function myFun(event) {
+
+    event.preventDefault();
+    let email = document.querySelector("#email").value;
+    let password = document.querySelector("#password").value;
+
+    let obj = {
+      email, password
+    }
+
+    let user = await axios.post("http://localhost:9000/users/create-session", obj);
+
+    if (user) {
+      window.location.href = "/users/profile"
+    } else {
+      alert("username ad password does't match!!")
+    }
+
+    // if (user.data.message == "user is not found") {
+    //     alert("username does't exist")
+    //     document.querySelector("#email").value = ""
+    //     document.querySelector("#password").value = ""
+    // } else if (user.data.message == "password is invalid") {
+    //     alert("password is invalid")
+    //     document.querySelector("#email").value = ""
+    //     document.querySelector("#password").value = ""
+    // } else {
+    //     let userEmail = user.data.user.email;
+    //     let userPassword = user.data.user.password;
+    //     alert("signed in successfully!!")
+    //     window.location.href = "/users/profile"
+    // }
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+</script>

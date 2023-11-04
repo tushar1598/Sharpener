@@ -1,0 +1,85 @@
+#expense-details {
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 500px;
+    height: 400px;
+
+}
+
+#expense-details form {
+    display: grid;
+    width: 80%;
+    margin: 30px;
+    gap: 20px;
+}
+
+#expense-details label {
+    font-weight: 600;
+    position: relative;
+    top: 10px;
+}
+
+#expense-details input,
+select {
+    padding: 7px;
+    outline: none;
+}
+
+#btn1 {
+    margin-top: 8px;
+    width: 120px;
+    color: white;
+    background-color: teal;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    cursor: pointer;
+}
+
+#btn {
+    position: relative;
+    top: -91px;
+    left: 310px;
+    width: 120px;
+    color: white;
+    background-color: rgb(5, 107, 5);
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    cursor: pointer;
+}
+
+#parent {
+    display: flex;
+    gap: 120px;
+    margin: 20px;
+}
+
+#expense-table table {
+    width: 400px;
+    text-align: center;
+}
+
+table th{
+    background-color: teal;
+    color: white;
+    padding: 10px;
+}
+
+table td{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 8px;
+}
+
+#delete{
+    background-color: red;
+}
+
+#delete a{
+    color: white;
+
+}
+
+#delete a:hover{
+    background-color: red;
+}
