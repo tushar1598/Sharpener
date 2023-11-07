@@ -1,0 +1,204 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<body>
+    <%- include("_header.html") %>
+        <div id="parent">
+            <div id="expense-details">
+                <form>
+                    <label for="">Amount</label>
+                    <input type="number" id="amount" placeholder="Amount" required>
+                    <label for="">Description</label>
+                    <input type="description" id="description" placeholder="Description" required>
+                    <label for="">Category</label>
+                    <select id="Category">
+                        <option value="">choose any category</option>
+                        <option value="Food">Food</option>
+                        <option value="Tour">Tour</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="School">School</option>
+                        <option value="Market">Market</option>
+                    </select>
+                    <input id="btn1" type="submit" value="Add Expense">
+                </form>
+            </div>
+
+            <div id="expense-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- append your output here -->
+                        <% for(let i of expense) {%>
+                            <% if(locals.user.id==i.userId) {%>
+                                <tr>
+                                    <td>
+                                        <%= i.amount %>
+                                    </td>
+                                    <td>
+                                        <%= i.description %>
+                                    </td>
+                                    <td>
+                                        <%= i.category %>
+                                    </td>
+                                    <td id="delete">
+                                        <a href="/expenses/delete-expense/<%= i.id %>">Delete</a>
+                                    </td>
+                                </tr>
+                            <%}%>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <form class="pay-form">
+            <input type="hidden" name="id">
+            <input type="hidden" name="paymentId">
+            <input type="hidden" name="orderId">
+            <input type="hidden" name="status">
+            <input id="btn" style="cursor: pointer;" type="submit" value="Buy Premium">
+        </form>
+
+
+
+
+
+        <div id="premium">
+
+        </div>
+
+        <button id="leaderboard">Leaderboard</button>
+        <p></p>
+        <div class="leaderboard"></div>
+        <p></p>
+
+
+
+
+</body>
+
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+    integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+
+<script>
+
+    document.querySelector("form").addEventListener("submit", myFun);
+
+    async function myFun(event) {
+
+        event.preventDefault();
+        let amount = document.querySelector("#amount").value;
+        let description = document.querySelector("#description").value;
+        let category = document.querySelector("#category").value;
+        let obj = {
+            amount, description, category
+        }
+
+        let response = await axios.post("http://localhost:9000/expenses/create-expense", obj);
+        location.reload();
+    }
+
+
+    $(document).ready(function () {
+        $('.pay-form').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: "http://localhost:9000/purchase/purchase-premium",
+                type: "POST",
+                data: formData,
+                success: function (res) {
+                    if (res.success) {
+                        var options = {
+                            "key": "" + res.key_id + "",
+                            "amount": "" + res.amount + "",
+                            "currency": "INR",
+                            "name": "" + res.product_name + "",
+                            "description": "" + res.description + "",
+                            "image": "https://dummyimage.com/600x400/000/fff",
+                            "order_id": "" + res.order_id + "",
+                            "handler": function (response) {
+                                alert("Payment Succeeded");
+                                // window.open("/","_self")
+                            },
+                            "prefill": {
+                                "contact": "" + res.contact + "",
+                                "name": "" + res.name + "",
+                                "email": "" + res.email + ""
+                            },
+                            "notes": {
+                                "description": "" + res.description + ""
+                            },
+                            "theme": {
+                                "color": "#2300a3"
+                            }
+                        };
+                        var razorpayObject = new Razorpay(options);
+                        razorpayObject.on('payment.failed', function (response) {
+                            alert("Payment Failed");
+                        });
+                        razorpayObject.open();
+                    }
+                    else {
+                        alert(res.msg);
+                    }
+                }
+            })
+
+        });
+    });
+
+
+
+
+    axios.get("http://localhost:9000/purchase/premium").then((res) => {
+        console.log(res.data)
+    });
+
+    axios.get("http://localhost:9000/purchase/all-order").then((res) => {
+        let orders = res.data;
+        console.log(orders)
+        if (orders.premium) {
+            document.querySelector("#btn").style.display = "none"
+            let p = document.createElement("p");
+            p.innerText = "You are a Premium user"
+            p.style.color = "green"
+            document.querySelector("#premium").append(p);
+        }
+    });
+
+    axios.get("http://localhost:9000/expenses/total-expense").then((res) => {
+        let totalAmount = 0;
+        for (let i of res.data.expense) {
+            totalAmount += Number(i.amount)
+        } 6
+        document.querySelector("#leaderboard").addEventListener("click", function () {
+            document.querySelector(".leaderboard").innerText = `Total Expense = ${totalAmount}`
+        })
+    })
+
+
+
+</script>
