@@ -1,0 +1,56 @@
+h1 {
+    text-align: center;
+}
+
+#msg {
+    background-color: teal;
+    color: white;
+    width: 98%;
+    position: fixed;
+    margin-top: 4%;
+    padding: 8px;
+}
+
+#msg form {
+    margin: auto;
+    width: 50%;
+    padding: 5px;
+}
+
+#message {
+    width: 80%;
+    padding: 8px;
+    outline: none;
+}
+
+#submit {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#peoples {
+    margin: auto;
+    height: 450px;
+    width: 60%;
+}
+
+#peoples li {
+    height: 15px;
+    padding: 7px;
+    width: 80%;
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li:nth-child(even) {
+    background-color: #d4c6c6;
+    /* Light color for even items */
+}
+
+li:nth-child(odd) {
+    background-color: #e6e6e6;
+    /* Darker color for odd items */
+}
