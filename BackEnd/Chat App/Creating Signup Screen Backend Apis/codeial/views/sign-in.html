@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <%- include("_header.html") %>
+        <h1>Sign-in</h1>
+        <form>
+            <input type="email" id="email" name="email" placeholder="email" required>
+            <input type="password" id="password" name="password" placeholder="password" required>
+            <input type="submit" value="Sign-in">
+        </form>
+</body>
+
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.querySelector("form").addEventListener("submit", myFun);
+    async function myFun(event) {
+        event.preventDefault();
+        let Email = document.querySelector("#email").value;
+        let Password = document.querySelector("#password").value;
+        let obj = {
+            Email, Password
+        }
+        let res = await axios.post("http://localhost:9000/users/create-session", obj);
+        if (res.data.message == "user not found") {
+            alert("user not found!!");
+            location.reload();
+        } else {
+            if (res.data.user.Password == Password) {
+                alert("Signing in successfully!!")
+                window.location.href = "/users/profile"
+            } else {
+                alert("password is wrong")
+                location.reload();
+            }
+        }
+    }
+</script>
