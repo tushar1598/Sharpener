@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+
+
+<body>
+    <%- include("_header.html") %>
+        <div id="parent">
+            <div id="msg">
+                <p></p>
+                <div id="hide" hidden>
+                    <h5 id="hide-name">
+                        <%= locals.user.name %>
+                    </h5>
+                    <h5 id="hide-id">
+                        <%= locals.user.id %>
+                    </h5>
+                </div>
+
+                <!-- <div class="incoming">
+                    <h4>tushar</h4>
+                    <p>Hello</p>
+                </div>
+                <div class="outgoing">
+                    <h4>tanu</h4>
+                    <p>hii</p>
+                </div> -->
+
+                <% for(let i of message) {%>
+                    <% if(locals.user.id !=i.userId) {%>
+                        <h4>
+                            <%= i.username %>
+                        </h4>
+                        <div class="incoming">
+                            <p>
+                                <%= i.message %>
+                            </p>
+                        </div>
+                    <%}%>
+                        <% if(locals.user.id==i.userId) {%>
+                        <h4 class="otging">
+                            <%= locals.user.name %>
+                        </h4>
+                        <div class="outgoing">
+                            <p>
+                            <%= i.message %>
+                            </p>
+                        </div>
+                    <%}%>
+                <%}%>
+
+            </div>
+        </div>
+        <div id="msg-form">
+            <form>
+                <textarea id="textarea" cols="30" rows="1" placeholder="write a message...."></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+
+
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/profile.js"></script>
+</body>
+
+</html>

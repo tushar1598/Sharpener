@@ -1,0 +1,72 @@
+#parent {
+    width: 60%;
+    height: 500px;
+    border: 1px solid red;
+    overflow-y: auto;
+    margin: 50px auto;
+}
+
+#msg-form {
+    border: 1px solid red;
+    width: 60%;
+    margin: -50px auto;
+}
+
+#msg-form>form {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    gap: 3px;
+}
+
+#msg-form>form,
+textarea,
+input {
+    padding: 5px;
+}
+
+#msg-form textarea {
+    width: 87%;
+    padding: 12px;
+    outline: none;
+}
+
+#msg-form input {
+    background-color: teal;
+    color: white;
+    padding: 11px;
+    border: none;
+    width: 8.5%;
+    cursor: pointer;
+}
+
+.incoming p,
+.outgoing p {
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.incoming {
+    width: 30%;
+    padding: 8px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+}
+
+.incoming h4 {
+    margin-left: 30px;
+}
+
+.otging {
+    color: red;
+    text-align: right;
+}
+
+.outgoing {
+    width: 30%;
+    margin-left: auto;
+    padding: 8px;
+    background-color: rgb(180, 226, 112);
+    border-radius: 5px;
+}
