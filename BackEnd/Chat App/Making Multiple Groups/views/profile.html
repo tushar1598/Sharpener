@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Profile</title>
+</head>
+
+
+<body>
+    <%- include("_header.html") %>
+   <div id="full-page">
+    <div id="all-users">
+        <% for(let k of users) {%>
+            <% if(locals.user.id !=k.id) {%>
+            <h2><%= k.name %></h2>
+            <hr>
+            <%}%>    
+        <%}%>    
+    </div>
+    <div id="chatting">
+        <div id="parent">
+            <p class="space"></p>
+            <div id="msg">
+                <p></p>
+                <div id="hide" hidden>
+                    <h5 id="hide-name">
+                        <%= locals.user.name %>
+                    </h5>
+                    <h5 id="hide-id">
+                        <%= locals.user.id %>
+                    </h5>
+                </div>
+
+                <!-- <div class="incoming">
+                    <h4>tushar</h4>
+                    <p>Hello</p>
+                </div>
+                <div class="outgoing">
+                    <h4>tanu</h4>
+                    <p>hii</p>
+                </div> -->
+
+                <% for(let i of message) {%>
+                    <% if(locals.user.id !=i.userId) {%>
+                        <h4 id="incmg">
+                            <%= i.username %>
+                        </h4>
+                        <div class="incoming">
+                            <p>
+                                <i><%= i.message %></i>
+                            </p>
+                        </div>
+                        <p class="space"></p>
+                    <%}%>
+                        <% if(locals.user.id==i.userId) {%>
+                        <h4 class="otging">
+                            <%= locals.user.name %>
+                        </h4>
+                        <div class="outgoing">
+                            <p>
+                              <i><%= i.message %></i>
+                             </p>
+                        </div>
+                        <p class="space"></p>
+                    <%}%>
+                <%}%>
+
+            </div>
+        </div>
+        <div id="msg-form">
+            <form>
+                <textarea id="textarea" cols="30" rows="1" placeholder="write a message...."></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+   </div>
+       
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/profile.js"></script>
+</body>
+
+</html>
