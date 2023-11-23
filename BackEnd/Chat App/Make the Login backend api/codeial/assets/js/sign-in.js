@@ -8,16 +8,14 @@ async function myFun(event) {
     Password,
   };
   let res = await axios.post("http://localhost:9000/users/create-session", obj);
-  if (res.data.message == "user not found") {
+  if (res.data.message == "password is wrong!!") {
+    alert("password is invalid!!");
+    location.reload();
+  } else if (res.data.message == "user not found") {
     alert("user not found!!");
     location.reload();
   } else {
-    if (res.data.user.Password == Password) {
-      alert("Signing in successfully!!");
-      window.location.href = "/users/profile";
-    } else {
-      alert("password is wrong");
-      location.reload();
-    }
+    alert("user singed in successfully!!");
+    window.location.href = "/users/profile";
   }
 }

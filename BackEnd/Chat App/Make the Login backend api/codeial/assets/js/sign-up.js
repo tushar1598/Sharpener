@@ -18,8 +18,13 @@ async function myFun(event) {
     alert("password does not match!!");
     location.reload();
   } else {
-    let myData = await axios.post("http://localhost:9000/users/create", obj);
-    alert("user created successfully!!");
-    location.reload();
+    let res = await axios.post("http://localhost:9000/users/create", obj);
+    if (res.data.message == "user already exist!!") {
+      alert("username is already exist!!");
+      location.reload();
+    } else {
+      alert("user created successfully!!");
+      location.reload();
+    }
   }
 }
