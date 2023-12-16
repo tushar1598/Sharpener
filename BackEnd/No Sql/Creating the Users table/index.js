@@ -1,0 +1,1 @@
+console.log("Creating the Users table")
