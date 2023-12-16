@@ -1,1 +1,0 @@
-console.log("Getting Orders Placed");
