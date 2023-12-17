@@ -1,1 +1,0 @@
-console.log("Integrating Typescript with Node and Express")

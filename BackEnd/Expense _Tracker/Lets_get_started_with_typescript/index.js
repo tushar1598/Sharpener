@@ -1,1 +1,0 @@
-console.log("Lets get started with typescript")

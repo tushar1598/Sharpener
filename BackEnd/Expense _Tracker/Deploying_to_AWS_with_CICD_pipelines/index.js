@@ -1,1 +1,0 @@
-console.log("Deploying to AWS with CICD pipelines")
